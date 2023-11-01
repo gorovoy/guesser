@@ -7,3 +7,7 @@ Static up is 172.18.0.2
 
 <h5>Telescope</h5>
 /telescope/requests
+
+<h4>Run dev enviroment</h4>
+php artisan serve
+
