@@ -14,4 +14,7 @@ use \App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/check', [HomeController::class, 'check'])->name('check');
+Route::get('/success', [HomeController::class, 'success'])->name('success');
+Route::get('/reject', [HomeController::class, 'reject'])->name('reject');

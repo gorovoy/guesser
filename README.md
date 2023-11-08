@@ -10,4 +10,5 @@ Static up is 172.18.0.2
 
 <h4>Run dev enviroment</h4>
 php artisan serve
+docker-compose up
 
