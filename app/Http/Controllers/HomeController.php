@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\RandomBooleanGeneratorService;
+use App\Services\RandomQuestionGeneratorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
+use function Termwind\render;
+
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, RandomQuestionGeneratorService $randomQuestionGeneratorService)
     {
-        return view('home.index');
+        $view = $randomQuestionGeneratorService->generate();
+        
+        $question = view($view)->render();
+        
+        return view('home.index', ['question' => $question]);
     }
     
-    public function check(Request $request)
+    public function check(Request $request, RandomBooleanGeneratorService $randomBooleanGeneratorService)
     {
-        // todo class for generate random value
-        $randomNumber = rand(0, 1);
+        $answer = $randomBooleanGeneratorService->generate();
         
-        // todo Facade for send message with class
-        if ($randomNumber === 1) {
-            $class = 'alert-danger';
-            $route = 'reject';
-            $message = 'reject';
-        } else {
+        if ($answer) {
             $class = 'alert-success';
             $route = 'success';
             $message = 'success';
+        } else {
+            $class = 'alert-danger';
+            $route = 'reject';
+            $message = 'reject';
         }
         
         Session::flash('message', $message);
