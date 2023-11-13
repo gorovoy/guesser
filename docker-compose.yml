@@ -15,6 +15,18 @@ services:
       static_network:
         ipv4_address: 172.18.0.2
 
+  adminer:
+    image: adminer
+    ports:
+      - 7070:8080
+    links:
+      - mariadb
+    depends_on:
+      - mariadb
+    networks:
+      static_network:
+        ipv4_address: 172.18.0.3
+
 networks:
   static_network:
     ipam:

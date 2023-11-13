@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\RandomBooleanGeneratorService;
 use App\Services\RandomQuestionGeneratorService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\View\View;
 
 use function Termwind\render;
 
@@ -19,6 +17,9 @@ class HomeController extends Controller
         $view = $randomQuestionGeneratorService->generate();
         
         $question = view($view)->render();
+        
+        Session::flash('message', 'Primary Flash Message');
+        Session::flash('alert-class', 'alert-primary');
         
         return view('home.index', ['question' => $question]);
     }
